@@ -5,7 +5,12 @@
 package com.yandex.kbelyako;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
 import java.util.Arrays;
 import java.util.Scanner;
@@ -70,7 +75,7 @@ public class Main {
 			testGroup.addstudent(student1, 1);*/
 	
 		System.out.println(testGroup);
-		testGroup.addstudent(student11, 13);
+		//testGroup.addstudent(student11, 13);
 
 /*		try {
 
@@ -87,7 +92,7 @@ testGroup.rmvStudent(-11);
 testGroup.addstudent(student4, 4);
 testGroup.addstudent(student6, 6);
 testGroup.addstudent(student7, 7);
-testGroup.addstudent(student8, 8);
+//testGroup.addstudent(student8, 8);
 
 //testGroup.sorbysName();
 //testGroup.toStringTable();
@@ -105,21 +110,42 @@ testGroup.addstudent(student8, 8);
 //testGroup.sortByParam(3);
 //testGroup.sortByParam(-83);
 //testGroup.addstudentInteractive(5);
-testGroup.toStringTable();
+//testGroup.toStringTable();
 
 
 //testGroup.getMilReadyStudents();
 
-testGroup.addstudent(student3, 3);
+//testGroup.addstudent(student3, 3);
 
-testGroup.toStringTable();
+
 testGroup.setName("testGroup1");
+testGroup.toStringTable();
 testGroup.saveToFile();
 
 Group  groupFromFile1 = new Group("GroupfromFile1");
 File t = new File("testGroup1.txt");
 groupFromFile1=Group.loadGroup(t);
 groupFromFile1.toStringTable();
+
+try(ObjectOutputStream OOS=new ObjectOutputStream(new FileOutputStream("fil"))){
+OOS.writeObject(testGroup);
+} catch(IOException e){
+System.out.println("ERROR save group !!!");
+}
+
+Group  groupFromFile2 = new Group("GroupfromFile2");
+groupFromFile2=null;
+
+try (ObjectInputStream OIS=new ObjectInputStream(new FileInputStream("fil"))){
+	groupFromFile2=(Group)OIS.readObject();
+} catch(IOException |
+ClassNotFoundException e){
+System.out.println("ERROR load group !!!");
+}
+
+groupFromFile2.toStringTable();
+
+
 
 	}
 

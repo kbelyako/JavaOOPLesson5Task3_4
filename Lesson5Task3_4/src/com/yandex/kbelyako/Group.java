@@ -6,17 +6,18 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Scanner;
 
-public class Group implements Comparator<Human>, Military {
+public class Group implements  Comparator<Human>, Military,Serializable {
 
 	private Student[] group1 = new Student[10];
 
 	public Group() {
 		super();
-		// TODO Auto-generated constructor stub
+
 	}
 
 	public Student[] getGroup1() {
@@ -83,8 +84,10 @@ public class Group implements Comparator<Human>, Military {
 			if (group1[i - 1] == null) {
 				group1[i - 1] = student;
 			} else
-				System.out.println("Position " + i
-						+ " is already busy in this group, please delete student from this position first or try to add student to another position");
+				System.out
+						.println("Position "
+								+ i
+								+ " is already busy in this group, please delete student from this position first or try to add student to another position");
 
 		}
 	}
@@ -121,8 +124,10 @@ public class Group implements Comparator<Human>, Military {
 			if (group1[i - 1] == null) {
 				group1[i - 1] = newStudent;
 			} else
-				System.out.println("Position " + i
-						+ " is already busy in this group, please delete student from this position first or try to add student to another position");
+				System.out
+						.println("Position "
+								+ i
+								+ " is already busy in this group, please delete student from this position first or try to add student to another position");
 
 		}
 	}
@@ -132,11 +137,13 @@ public class Group implements Comparator<Human>, Military {
 			if (group1[i - 1] != null) {
 				group1[i - 1] = null;
 			} else
-				System.out.println("Position " + i + " is already empty in this group");
+				System.out.println("Position " + i
+						+ " is already empty in this group");
 
 		} catch (ArrayIndexOutOfBoundsException e) {
 
-			System.out.println("Not possible to delete student from this position, because it's out of range 1..10");
+			System.out
+					.println("Not possible to delete student from this position, because it's out of range 1..10");
 		}
 	}
 
@@ -172,7 +179,8 @@ public class Group implements Comparator<Human>, Military {
 			isSorted = true;
 			for (int i = 0; i < groupNew.length - 1; i++) {
 				if ((groupNew[i] != null) && (groupNew[i + 1] != null)) {
-					if (groupNew[i].getlName().charAt(0) > groupNew[i + 1].getlName().charAt(0)) {
+					if (groupNew[i].getlName().charAt(0) > groupNew[i + 1]
+							.getlName().charAt(0)) {
 						isSorted = false;
 						buf = groupNew[i];
 						groupNew[i] = groupNew[i + 1];
@@ -249,7 +257,8 @@ public class Group implements Comparator<Human>, Military {
 
 		}
 		if (result == null) {
-			strResult = strResult + (char) 0x0D + "No such student in this group";
+			strResult = strResult + (char) 0x0D
+					+ "No such student in this group";
 		}
 		return strResult;
 
@@ -368,11 +377,11 @@ public class Group implements Comparator<Human>, Military {
 		return resGroup;
 	}
 
-	public static Group loadGroup(File inputFile) {
+	public static  Group loadGroup(File inputFile) {
 		Group resGroup = new Group();
-
+		//resGroup.setName(name);
 		resGroup = Group.groupFromString(Group.FiletoString(inputFile));
-		resGroup.setName(stripExtension(inputFile.getName()));
+		 resGroup.setName(stripExtension(inputFile.getName()));
 		return resGroup;
 	}
 

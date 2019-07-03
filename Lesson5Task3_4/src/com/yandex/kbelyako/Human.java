@@ -1,8 +1,9 @@
 package com.yandex.kbelyako;
 
+import java.io.Serializable;
 import java.util.Comparator;
 
-public class Human implements Comparable {
+public class Human implements Comparable,Serializable {
 
 	private String fName;
 	private String patronymic;
